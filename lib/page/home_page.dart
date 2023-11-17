@@ -1,3 +1,7 @@
+import 'package:bangun_datar_kelas_b/page/lingkaran_page.dart';
+import 'package:bangun_datar_kelas_b/page/persegi_page.dart';
+import 'package:bangun_datar_kelas_b/page/persegi_panjang_page.dart';
+import 'package:bangun_datar_kelas_b/page/segitiga_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,42 +12,56 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("Home Page", style: TextStyle(
-            color: Colors.white,
-          )),
+          child: Text("Home Page",
+              style: TextStyle(
+                color: Colors.white,
+              )),
         ),
-        backgroundColor: Color(0xFF17FFA5),
+        backgroundColor: const Color(0xFF17FFA5),
       ),
       body: ListView(
         children: [
-            Row(
-              children: [
-                CustomMenu(imageAsset: "assets/persegi.jpg", title: "Persegi"),
-                CustomMenu(imageAsset: "assets/persegi.jpg", title: "Persegi"),
-                CustomMenu(imageAsset: "assets/persegi.jpg", title: "Persegi"),
-              ],
+          Row(children: [
+            Expanded(
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PersegiPage()));
+                  },
+                  child: CustomMenu(
+                      imageAsset: "assets/persegi.jpg", title: "Persegi")),
             ),
-            Row(
-              children: [
-                CustomMenu(imageAsset: "assets/persegi_panjang.jpg", title: "Persegi Panjang"),
-                CustomMenu(imageAsset: "assets/persegi_panjang.jpg", title: "Persegi Panjang"),
-                CustomMenu(imageAsset: "assets/persegi_panjang.jpg", title: "Persegi Panjang"),
-              ],
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PersegiPanjangPage()));
+                },
+                child: CustomMenu(
+                    imageAsset: "assets/persegi_panjang.jpg",
+                    title: "Persegi Panjang"),
+              ),
             ),
-            Row(
-              children: [
-                CustomMenu(imageAsset: "assets/lingkaran.jpg", title: "Lingkaran"),
-                CustomMenu(imageAsset: "assets/lingkaran.jpg", title: "Lingkaran"),
-                CustomMenu(imageAsset: "assets/lingkaran.jpg", title: "Lingkaran"),
-              ],
-            ),
-            Row(
-              children: [
-                CustomMenu(imageAsset: "assets/segitiga.jpg", title: "Segitiga"),
-                CustomMenu(imageAsset: "assets/segitiga.jpg", title: "Segitiga"),
-                CustomMenu(imageAsset: "assets/segitiga.jpg", title: "Segitiga"),
-              ],
-            ),
+          ]),
+          Row(
+            children: [
+              Expanded(
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SegitigaPage()));
+                      },
+                      child: CustomMenu(
+                          imageAsset: "assets/segitiga.jpg",
+                          title: "Segitiga"))),
+              Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LingkaranPage()));
+                    },
+                      child: CustomMenu(
+                          imageAsset: "assets/lingkaran.jpg",
+                          title: "Lingkaran"))),
+            ],
+          )
         ],
       ),
     );
@@ -52,7 +70,9 @@ class HomePage extends StatelessWidget {
 
 class CustomMenu extends StatelessWidget {
   const CustomMenu({
-    super.key, required this.imageAsset, required this.title,
+    super.key,
+    required this.imageAsset,
+    required this.title,
   });
 
   final String imageAsset;
@@ -62,18 +82,15 @@ class CustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           color: Colors.green,
           child: Column(
             children: [
-              Image.asset(imageAsset, height: 150),
-              Text(title, style: TextStyle(
-                color: Colors.white
-              )),
+              Image.asset(imageAsset, height: 300),
+              Text(title, style: const TextStyle(color: Colors.white)),
             ],
-          )
-      ),
+          )),
     );
   }
 }
